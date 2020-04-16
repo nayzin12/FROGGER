@@ -1,3 +1,4 @@
+
 #
 #
 #        Frogger
@@ -41,21 +42,20 @@ def lane4(car,speed,reset):
     car = loop(car,-100,reset)
     return car
 
-    
 def main():
     
 
     pygame.init()
      
-    fps = 120
+    fps = 60
     fpsClock = pygame.time.Clock()
      
-    width, height = 516,580
+    width, height = 516,650
     screen = pygame.display.set_mode((width, height))
     
-    x_speed1 = 12
-    x_speed2 = 10
-    x_speed3 = 14
+    x_speed1 = 2
+    x_speed2 = 4
+    x_speed3 = 6
     
     car1x = 616
     
@@ -73,6 +73,9 @@ def main():
     car11x = 1000
     car12x = 1150
     car13x = 1300
+
+    deltax=0
+    deltay=0
     
      
     # Game loop.
@@ -83,6 +86,22 @@ def main():
         if event.type == QUIT:
           pygame.quit()
           sys.exit()
+
+        if event.type == pygame.KEYDOWN:
+                key = event.dict['key']
+                if key == pygame.K_UP:
+                    deltay-=40
+                     
+                elif key == pygame.K_LEFT:
+                   deltax-=40
+                   left=True
+                elif key == pygame.K_RIGHT:
+                   deltax+=40
+                   left=False
+                elif key == pygame.K_DOWN:
+                    deltay+=40
+                else:
+                   deltax=0
       
       # Update.
       
@@ -101,6 +120,7 @@ def main():
       frog=spread_sheet.subsurface(300,47,50,40)
 
       carx_list = [car1x,car2x,car3x,car4x,car5x,car6x,car7x,car8x,car9x,car10x,car1x,car12x,car13x]
+
       
       # Draw.
       #Each lane have 5 pixels between them
@@ -141,12 +161,12 @@ def main():
       screen.blit(car_type4,[car12x,278])
       screen.blit(car_type4,[car13x,278])
 
+      screen.blit(frog,[258+deltax,590+deltay])
 
-      screen.blit(frog,[258,590])
+     
       
       pygame.display.flip()
       fpsClock.tick(fps)
 
 main()
-
 
