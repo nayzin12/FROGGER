@@ -1,4 +1,3 @@
-
 #
 #
 #        Frogger
@@ -42,12 +41,27 @@ def lane4(car,speed,reset):
     car = loop(car,-100,reset)
     return car
 
+def water1(item,speed):
+    item -= speed
+    item = loop(item,-300,300)
+    return item
+
+def water2(item,speed):
+    item += speed
+    item = loop(item,616,-200)
+    return item
+
+def water3(item,speed):
+    item -= speed
+    item = loop(item,-300,300)
+    return item
+
 def main():
     
 
     pygame.init()
      
-    fps = 60
+    fps = 120
     fpsClock = pygame.time.Clock()
      
     width, height = 516,650
@@ -58,6 +72,8 @@ def main():
     x_speed3 = 6
     
     car1x = 616
+    car14x = 816
+    car15x = 1016
     
     car2x = -100
     car3x = -300
@@ -73,6 +89,15 @@ def main():
     car11x = 1000
     car12x = 1150
     car13x = 1300
+
+    log1x = 650
+    log2x = 1100
+
+    log3x = -300
+    log4x = -750
+
+    log5x = 650
+    log6x = 1100
 
     deltax=0
     deltay=0
@@ -117,9 +142,14 @@ def main():
 
       car_type4=spread_sheet.subsurface(105,270,55,45)
 
+      log_type1=spread_sheet.subsurface(277,341,223,51)
+
+      log_type2=spread_sheet.subsurface(275,268,175,57)
+
       frog=spread_sheet.subsurface(300,47,50,40)
 
-      carx_list = [car1x,car2x,car3x,car4x,car5x,car6x,car7x,car8x,car9x,car10x,car1x,car12x,car13x]
+      carx_list = [car1x,car2x,car3x,car4x,car5x,car6x,car7x,car8x,car9x,car10x,car1x,car12x,car13x,car14x,car15x]
+      logx_list = [log1x,log2x,log3x,log4x,log5x,log6x]
 
       
       # Draw.
@@ -129,7 +159,11 @@ def main():
       
       #Lane 1 (420)
       car1x = lane1(car1x, x_speed1)
+      car14x = lane1(car14x, x_speed1)
+      car15x = lane1(car15x, x_speed1)
       screen.blit(car_type1,[car1x,420])
+      screen.blit(car_type1,[car14x,420])
+      screen.blit(car_type1,[car15x,420])
 
       #Lane 2 (375)
       car2x = lane2(car2x,x_speed1)
@@ -160,6 +194,24 @@ def main():
       screen.blit(car_type4,[car11x,278])
       screen.blit(car_type4,[car12x,278])
       screen.blit(car_type4,[car13x,278])
+
+      #Water 1 (188)
+      log1x = water1(log1x,x_speed1)
+      log2x = water1(log2x,x_speed1)
+      screen.blit(log_type1,[log1x,188])
+      screen.blit(log_type1,[log2x,188])
+
+      #Water 2 (135)
+      log3x = water2(log3x,x_speed2)
+      log4x = water2(log4x,x_speed2)
+      screen.blit(log_type2,[log3x,135])
+      screen.blit(log_type2,[log4x,135])
+
+      #Water 3 (75)
+      log5x = water3(log5x,x_speed1)
+      log6x = water3(log6x,x_speed1)
+      screen.blit(log_type2,[log5x,75])
+      screen.blit(log_type2,[log6x,75])
 
       screen.blit(frog,[258+deltax,590+deltay])
 
