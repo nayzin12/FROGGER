@@ -1,3 +1,4 @@
+
 #
 #
 #        Frogger
@@ -61,7 +62,7 @@ def main():
 
     pygame.init()
      
-    fps = 120
+    fps = 30
     fpsClock = pygame.time.Clock()
      
     width, height = 516,650
@@ -101,6 +102,27 @@ def main():
 
     deltax=0
     deltay=0
+
+
+    # Update.
+      
+    background_image=pygame.image.load("background.png").convert_alpha()
+    
+    spread_sheet=pygame.image.load("frogger.png").convert_alpha()
+
+    car_type1=spread_sheet.subsurface(110,47,50,40)
+
+    car_type2=spread_sheet.subsurface(115,203,50,40)
+
+    car_type3=spread_sheet.subsurface(45,128,120,47)
+
+    car_type4=spread_sheet.subsurface(105,270,55,45)
+
+    log_type1=spread_sheet.subsurface(277,341,223,51)
+
+    log_type2=spread_sheet.subsurface(275,268,175,57)
+
+    frog=spread_sheet.subsurface(300,47,50,40)
     
      
     # Game loop.
@@ -128,25 +150,6 @@ def main():
                 else:
                    deltax=0
       
-      # Update.
-      
-      background_image=pygame.image.load("background.png")
-    
-      spread_sheet=pygame.image.load("frogger.png")
-
-      car_type1=spread_sheet.subsurface(110,47,50,40)
-
-      car_type2=spread_sheet.subsurface(115,203,50,40)
-
-      car_type3=spread_sheet.subsurface(45,128,120,47)
-
-      car_type4=spread_sheet.subsurface(105,270,55,45)
-
-      log_type1=spread_sheet.subsurface(277,341,223,51)
-
-      log_type2=spread_sheet.subsurface(275,268,175,57)
-
-      frog=spread_sheet.subsurface(300,47,50,40)
 
       carx_list = [car1x,car2x,car3x,car4x,car5x,car6x,car7x,car8x,car9x,car10x,car1x,car12x,car13x,car14x,car15x]
       logx_list = [log1x,log2x,log3x,log4x,log5x,log6x]
@@ -221,4 +224,3 @@ def main():
       fpsClock.tick(fps)
 
 main()
-
