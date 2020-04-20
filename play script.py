@@ -1,4 +1,5 @@
 
+
 #
 #
 #        Frogger
@@ -100,6 +101,32 @@ def main():
     log5x = 650
     log6x = 1100
 
+    lane1y = 420
+    lane2y = 375
+    lane3y = 323
+    lane4y = 278
+    water1y = 188
+    water2y = 135
+    water3y = 75
+
+    car_type1_w = 50
+    car_type1_h = 40
+
+    car_type2_w = 50
+    car_type2_h = 40
+
+    car_type3_w = 120
+    car_type3_h = 47
+
+    car_type4_w = 55
+    car_type4_h = 45
+
+    log_type1_w = 223
+    log_type1_h = 51
+
+    log_type2_w = 175
+    log_type2_h = 57
+
     deltax=0
     deltay=0
 
@@ -151,10 +178,21 @@ def main():
                    deltax=0
       
 
+      car_list = []
+      log_list = []
       carx_list = [car1x,car2x,car3x,car4x,car5x,car6x,car7x,car8x,car9x,car10x,car1x,car12x,car13x,car14x,car15x]
+      laney_list = [lane1y,lane2y,lane3y,lane4y]
       logx_list = [log1x,log2x,log3x,log4x,log5x,log6x]
+      logy_list = [water1y,water2y,water3y]
+      for i in laney_list:
+        for q in carx_list:
+            car = [q,i]
+            car_list.append(car)
+      for i in logy_list:
+        for q in logx_list:
+            log = [q,i]
+            log_list.append(log)
 
-      
       # Draw.
       #Each lane have 5 pixels between them
       #Each lane is 45 pixels wide
@@ -164,27 +202,27 @@ def main():
       car1x = lane1(car1x, x_speed1)
       car14x = lane1(car14x, x_speed1)
       car15x = lane1(car15x, x_speed1)
-      screen.blit(car_type1,[car1x,420])
-      screen.blit(car_type1,[car14x,420])
-      screen.blit(car_type1,[car15x,420])
+      screen.blit(car_type1,[car1x,lane1y])
+      screen.blit(car_type1,[car14x,lane1y])
+      screen.blit(car_type1,[car15x,lane1y])
 
       #Lane 2 (375)
       car2x = lane2(car2x,x_speed1)
       car3x = lane2(car3x,x_speed1)
       car4x = lane2(car4x,x_speed1)
-      screen.blit(car_type2,[car2x,375])
-      screen.blit(car_type2,[car3x,375])
-      screen.blit(car_type2,[car4x,375])
+      screen.blit(car_type2,[car2x,lane2y])
+      screen.blit(car_type2,[car3x,lane2y])
+      screen.blit(car_type2,[car4x,lane2y])
 
       #Lane 3 (323)
       car5x = lane3(car5x,x_speed2,650)
       car6x = lane3(car6x,x_speed2,820)
       car7x = lane3(car7x,x_speed2,990)
       car8x = lane3(car8x,x_speed2,1160)
-      screen.blit(car_type3,[car5x,323])
-      screen.blit(car_type3,[car6x,323])
-      screen.blit(car_type3,[car7x,323])
-      screen.blit(car_type3,[car8x,323])
+      screen.blit(car_type3,[car5x,lane3y])
+      screen.blit(car_type3,[car6x,lane3y])
+      screen.blit(car_type3,[car7x,lane3y])
+      screen.blit(car_type3,[car8x,lane3y])
 
       #Lane 4 (278)
       car9x = lane4(car9x,x_speed3,700)
@@ -192,29 +230,29 @@ def main():
       car11x = lane4(car11x,x_speed3,1000)
       car12x = lane4(car12x,x_speed3,1150)
       car13x = lane4(car13x,x_speed3,1300)
-      screen.blit(car_type4,[car9x,278])
-      screen.blit(car_type4,[car10x,278])
-      screen.blit(car_type4,[car11x,278])
-      screen.blit(car_type4,[car12x,278])
-      screen.blit(car_type4,[car13x,278])
+      screen.blit(car_type4,[car9x,lane4y])
+      screen.blit(car_type4,[car10x,lane4y])
+      screen.blit(car_type4,[car11x,lane4y])
+      screen.blit(car_type4,[car12x,lane4y])
+      screen.blit(car_type4,[car13x,lane4y])
 
       #Water 1 (188)
       log1x = water1(log1x,x_speed1)
       log2x = water1(log2x,x_speed1)
-      screen.blit(log_type1,[log1x,188])
-      screen.blit(log_type1,[log2x,188])
+      screen.blit(log_type1,[log1x,water1y])
+      screen.blit(log_type1,[log2x,water1y])
 
       #Water 2 (135)
       log3x = water2(log3x,x_speed2)
       log4x = water2(log4x,x_speed2)
-      screen.blit(log_type2,[log3x,135])
-      screen.blit(log_type2,[log4x,135])
+      screen.blit(log_type2,[log3x,water2y])
+      screen.blit(log_type2,[log4x,water2y])
 
       #Water 3 (75)
       log5x = water3(log5x,x_speed1)
       log6x = water3(log6x,x_speed1)
-      screen.blit(log_type2,[log5x,75])
-      screen.blit(log_type2,[log6x,75])
+      screen.blit(log_type2,[log5x,water3y])
+      screen.blit(log_type2,[log6x,water3y])
 
       screen.blit(frog,[258+deltax,590+deltay])
 
@@ -224,3 +262,4 @@ def main():
       fpsClock.tick(fps)
 
 main()
+
