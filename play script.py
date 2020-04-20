@@ -1,5 +1,3 @@
-
-
 #
 #
 #        Frogger
@@ -256,10 +254,17 @@ def main():
 
       screen.blit(frog,[258+deltax,590+deltay])
 
+      car_collide=(screen.blit(frog,[258+deltax,590+deltay])).collidelist(car_list)
+
+      for i in range(car_list):
+          if car_collide==car_list[i]:
+              deltax=deltax-deltax
+              deltay=deltay-deltay
+      
+
      
       
       pygame.display.flip()
       fpsClock.tick(fps)
 
 main()
-
