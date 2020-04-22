@@ -127,6 +127,7 @@ def main():
 
     deltax=0
     deltay=0
+    shift=0
 
 
     # Update.
@@ -136,18 +137,25 @@ def main():
     spread_sheet=pygame.image.load("frogger.png").convert_alpha()
 
     car_type1=spread_sheet.subsurface(110,47,50,40)
+    car1=car_type1.get_rect()
+    car1.x=car1x
+    car1.y=lane1y
+
 
     car_type2=spread_sheet.subsurface(115,203,50,40)
+    car2=car_type2.get_rect()
 
     car_type3=spread_sheet.subsurface(45,128,120,47)
+    car3=car_type3.get_rect()
 
     car_type4=spread_sheet.subsurface(105,270,55,45)
+    car4=car_type4.get_rect()
 
     log_type1=spread_sheet.subsurface(277,341,223,51)
 
     log_type2=spread_sheet.subsurface(275,268,175,57)
 
-    frog=spread_sheet.subsurface(300,47,50,40)
+    frog = pygame.image.load("frog.png")
     
      
     # Game loop.
@@ -162,30 +170,34 @@ def main():
         if event.type == pygame.KEYDOWN:
                 key = event.dict['key']
                 if key == pygame.K_UP:
-                    deltay-=40
+                    deltay-=20
+                    for i in range(0,200,100):
+                        shift+=i
                      
                 elif key == pygame.K_LEFT:
-                   deltax-=40
+                   deltax-=20
                    left=True
                 elif key == pygame.K_RIGHT:
-                   deltax+=40
+                   deltax+=20
                    left=False
                 elif key == pygame.K_DOWN:
-                    deltay+=40
+                    deltay+=20
+                    for i in range(0,200,100):
+                        shift+=i
                 else:
                    deltax=0
       
 
-      car_list = []
+      car_list = [car1]
       log_list = []
       carx_list = [car1x,car2x,car3x,car4x,car5x,car6x,car7x,car8x,car9x,car10x,car1x,car12x,car13x,car14x,car15x]
       laney_list = [lane1y,lane2y,lane3y,lane4y]
       logx_list = [log1x,log2x,log3x,log4x,log5x,log6x]
       logy_list = [water1y,water2y,water3y]
-      for i in laney_list:
-        for q in carx_list:
-            car = [q,i]
-            car_list.append(car)
+##      for i in laney_list:
+##        for q in carx_list:
+##            car = [q,i]
+##            car_list.append(car)
       for i in logy_list:
         for q in logx_list:
             log = [q,i]
@@ -200,7 +212,7 @@ def main():
       car1x = lane1(car1x, x_speed1)
       car14x = lane1(car14x, x_speed1)
       car15x = lane1(car15x, x_speed1)
-      screen.blit(car_type1,[car1x,lane1y])
+      screen.blit(car_type1,car1)
       screen.blit(car_type1,[car14x,lane1y])
       screen.blit(car_type1,[car15x,lane1y])
 
@@ -252,9 +264,13 @@ def main():
       screen.blit(log_type2,[log5x,water3y])
       screen.blit(log_type2,[log6x,water3y])
 
-      screen.blit(frog,[258+deltax,590+deltay])
+      frog=frog.subsurface((9+(shift%200),0,40,40))
 
-      car_collide=(screen.blit(frog,[258+deltax,590+deltay])).collidelist(car_list)
+      frog_rect=frog.get_rect()
+      frog_rect.x=258+deltax
+      frog_rect.y=590+deltay
+
+      car_collide=frog.collidelist(car_list)
 
       for i in range(car_list):
           if car_collide==car_list[i]:
